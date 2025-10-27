@@ -45,14 +45,13 @@ def load_rules(file_path="rules.json"):
 
 def get_description_files():
     """
-    Returns a list of available description files in the current directory.
-    Filters for .txt files that start with 'description'.
+    Returns a list of all .txt files in the current directory.
     """
-    description_files = []
+    txt_files = []
     for file in os.listdir('.'):
-        if file.startswith('description') and file.endswith('.txt'):
-            description_files.append(file)
-    return sorted(description_files)
+        if file.endswith('.txt'):
+            txt_files.append(file)
+    return sorted(txt_files)
 
 def select_input_file():
     """
@@ -62,11 +61,10 @@ def select_input_file():
     description_files = get_description_files()
     
     if not description_files:
-        print("\nNo description files found in the current directory.")
-        print("Looking for files starting with 'description' and ending with '.txt'")
+        print("\nNo .txt files found in the current directory.")
         return None
     
-    print("\nAvailable description files:")
+    print("\nAvailable .txt files:")
     for i, file in enumerate(description_files, 1):
         print(f"  {i}. {file}")
     
