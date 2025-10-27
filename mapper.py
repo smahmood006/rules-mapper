@@ -66,10 +66,6 @@ def select_input_file():
         print("Looking for files starting with 'description' and ending with '.txt'")
         return None
     
-    if len(description_files) == 1:
-        print(f"\nFound one description file: {description_files[0]}")
-        return description_files[0]
-    
     print("\nAvailable description files:")
     for i, file in enumerate(description_files, 1):
         print(f"  {i}. {file}")
@@ -83,6 +79,7 @@ def select_input_file():
             
             choice_num = int(choice)
             if 1 <= choice_num <= len(description_files):
+                print(f"\nSelected: {description_files[choice_num - 1]}")
                 return description_files[choice_num - 1]
             else:
                 print(f"Please enter a number between 1 and {len(description_files)}")
