@@ -1,0 +1,659 @@
+[
+  {
+    "id": "SPECIAL_SalesOfAssets",
+    "priority": 1,
+    "conditions": [
+      {"type": "AND", "keywords": ["sales of assets"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {
+        "short_name": "Profit/(loss) on disposal of Tangibles (P&L)",
+        "identifier": "profitorLossOnDisposalOfAdministrativeAssets.profitorLossOnDisposalOfTangibles"
+      },
+      {
+        "short_name": "Motor vehicles cost of disposals (B/S)",
+        "identifier": "motorVehicles CostOfDisposals"
+      }
+    ]
+  },
+  {
+    "id": "SPECIAL_Rounding",
+    "priority": 2,
+    "conditions": [
+      {"type": "AND", "keywords": ["rounding"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {
+        "short_name": "Administrative purchases Sundry expenses",
+        "identifier": "administrativePurchases.sundryExpenses"
+      }
+    ]
+  },
+  {
+    "id": "SPECIAL_RSM_01",
+    "priority": 3,
+    "conditions": [
+      {"type": "AND", "keywords": ["rsm-01"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {
+        "short_name": "Client-Specific Mapping Override",
+        "identifier": "clientSpecific.rsm01Override"
+      }
+    ]
+  },
+  {
+    "id": "TFA_Depn_Eliminated",
+    "priority": 5,
+    "conditions": [
+      {"type": "AND", "keywords": ["depreciation", "eliminated"]},
+      {"type": "OR", "keywords": ["disposals", "disposal"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Depreciation Eliminated On Disposals", "identifier": "[asset]DepreciationEliminatedOnDisposals"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Rates",
+    "priority": 9,
+    "conditions": [
+      {"type": "AND", "keywords": ["rates"]}
+    ],
+    "negations": ["water"],
+    "mappings": [
+      {"short_name": "Premises and utility costs Rates", "identifier": "administrative.premisesRates"}
+    ]
+  },
+  {
+    "id": "TFA_Cost_Additions",
+    "priority": 10,
+    "conditions": [
+      {"type": "OR", "keywords": ["property", "plant", "machinery", "motor vehicle", "land", "buildings", "equipment", "fittings", "commercial vehicle"]},
+      {"type": "AND", "keywords": ["cost", "additions"]}
+    ],
+    "negations": ["disposals", "brought forward"],
+    "mappings": [
+      {"short_name": "[Asset] Cost of Additions", "identifier": "[asset]CostOfAdditions"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Repairs",
+    "priority": 10.5,
+    "conditions": [
+      {"type": "OR", "keywords": ["repairs", "maintenance"]},
+      {"type": "OR", "keywords": ["equipment", "plant", "tool"]}
+    ],
+    "negations": ["vehicle"],
+    "mappings": [
+      {"short_name": "Repairs and Maintenance - Plant/Equipment", "identifier": "administrative.repairsAndMaintenance"}
+    ]
+  },
+  {
+    "id": "TFA_Cost_Disposals",
+    "priority": 11,
+    "conditions": [
+      {"type": "OR", "keywords": ["property", "plant", "machinery", "motor vehicle", "land", "buildings", "equipment", "fittings", "commercial vehicle"]},
+      {"type": "AND", "keywords": ["cost", "disposals"]}
+    ],
+    "negations": ["additions", "brought forward"],
+    "mappings": [
+      {"short_name": "[Asset] Cost of Disposals", "identifier": "[asset]CostOfDisposals"}
+    ]
+  },
+  {
+    "id": "TFA_Cost_BF",
+    "priority": 11.5,
+    "conditions": [
+      {"type": "OR", "keywords": ["property", "plant", "machinery", "motor vehicle", "land", "buildings", "equipment", "fittings", "commercial vehicle"]},
+      {"type": "OR", "keywords": ["cost", "b/f", "brought forward", "total", "valuation"], "type": "NOT_AND", "keywords": ["additions", "disposals"]}
+    ],
+    "negations": ["additions", "disposals", "depreciation", "depn", "charge for period"],
+    "mappings": [
+      {"short_name": "[Asset] Cost Brought Forward", "identifier": "[asset]CostBroughtForward"}
+    ]
+  },
+  {
+    "id": "TFA_Depn_Charge",
+    "priority": 12,
+    "conditions": [
+      {"type": "OR", "keywords": ["property", "plant", "machinery", "motor vehicle", "land", "buildings", "equipment", "fittings", "commercial vehicle"]},
+      {"type": "AND", "keywords": ["depreciation", "charge for period"]}
+    ],
+    "negations": ["accumulated", "eliminated on disposals"],
+    "mappings": [
+      {"short_name": "Depreciation Charge For Period", "identifier": "[asset]DepreciationChargeForPeriod"}
+    ]
+  },
+  {
+    "id": "TFA_Depn_BF",
+    "priority": 12.5,
+    "conditions": [
+      {"type": "OR", "keywords": ["property", "plant", "machinery", "motor vehicle", "land", "buildings", "equipment", "fittings", "commercial vehicle"]},
+      {"type": "OR", "keywords": ["depreciation", "accumulated", "b/f", "depn"], "type": "NOT_AND", "keywords": ["charge for period", "eliminated on disposals"]}
+    ],
+    "negations": ["charge for period", "eliminated on disposals"],
+    "mappings": [
+      {"short_name": "[Asset] Depreciation B/F", "identifier": "[asset]DepreciationBroughtForward"}
+    ]
+  },
+  {
+    "id": "CA_Stock_Only",
+    "priority": 13,
+    "conditions": [
+      {"type": "AND", "keywords": ["stock"]}
+    ],
+    "negations": ["opening", "closing", "purchases", "adjustment"],
+    "mappings": [
+      {"short_name": "Stock (Balance Sheet)", "identifier": "currentAssets.stock.stock"}
+    ]
+  },
+  {
+    "id": "PNL_COS_OpenStock",
+    "priority": 15,
+    "conditions": [
+      {"type": "AND", "keywords": ["opening stock"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Stock increase/(decrease) Opening stock", "identifier": "costOfSales.stockIncreaseDecreaseOpeningStock"}
+    ]
+  },
+  {
+    "id": "PNL_COS_ClosingStock",
+    "priority": 15.5,
+    "conditions": [
+      {"type": "AND", "keywords": ["closing stock"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Stock increase/(decrease) Closing stock", "identifier": "costOfSales.stockIncreaseDecreaseClosingStock"}
+    ]
+  },
+  {
+    "id": "CA_Tax_Repayable",
+    "priority": 18,
+    "conditions": [
+      {"type": "AND", "keywords": ["corporation tax", "repayable", "recoverable"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Corporation tax repayable (Asset)", "identifier": "currentAssets.taxation.corporationTaxRepayable"}
+    ]
+  },
+  {
+    "id": "CA_Prepayments",
+    "priority": 20,
+    "conditions": [
+      {"type": "OR", "keywords": ["prepayment", "prepaid"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Prepaid expenses", "identifier": "currentAssets.prepayments.prepaidExpenses"}
+    ]
+  },
+  {
+    "id": "CA_Intercompany_Debtors",
+    "priority": 21,
+    "conditions": [
+      {"type": "AND", "keywords": ["owed by", "group", "intercompany", "fellow"]},
+      {"type": "OR", "keywords": ["debtors", "receivable"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Amounts owed by fellow group undertakings", "identifier": "currentAssets.debtors.owedByFellowGroupUndertakings"}
+    ]
+  },
+  {
+    "id": "CA_OtherDebtors",
+    "priority": 24,
+    "conditions": [
+      {"type": "AND", "keywords": ["other", "debtors"]}
+    ],
+    "negations": ["trade"],
+    "mappings": [
+      {"short_name": "Other Debtors (Asset)", "identifier": "currentAssets.debtors.otherDebtors"}
+    ]
+  },
+  {
+    "id": "CA_Trade_Debtors",
+    "priority": 25,
+    "conditions": [
+      {"type": "OR", "keywords": ["debtors", "receivable", "control account"]}
+    ],
+    "negations": ["group", "intercompany", "fellow", "prepayment", "prepaid", "other", "creditors", "tax"],
+    "mappings": [
+      {"short_name": "Trade Debtors (Default)", "identifier": "currentAssets.tradeReceivables.tradeDebtors"}
+    ]
+  },
+  {
+    "id": "CA_BankCash",
+    "priority": 26,
+    "conditions": [
+      {"type": "OR", "keywords": ["bank", "cash", "reserve", "petty cash"]}
+    ],
+    "negations": ["charges", "loan", "liability", "interest received", "creditors", "tax", "fees", "sales", "purchases", "accountancy", "profit", "loss", "suspense", "control account"],
+    "mappings": [
+      {"short_name": "Cash at bank and in hand", "identifier": "currentAssets.cash.cashAtBankAndInHand"}
+    ]
+  },
+  {
+    "id": "CA_Suspense",
+    "priority": 27,
+    "conditions": [
+      {"type": "AND", "keywords": ["suspense", "account"]}
+    ],
+    "negations": ["tax"],
+    "mappings": [
+      {"short_name": "Suspense Account (Asset)", "identifier": "currentAssets.suspenseAccount"}
+    ]
+  },
+  {
+    "id": "CL_HP_Current",
+    "priority": 28,
+    "conditions": [
+      {"type": "OR", "keywords": ["hire purchase", "hp", "car finance", "directors car finance"]},
+      {"type": "OR", "keywords": ["current", "current portion", "1yr", "1 year"]}
+    ],
+    "negations": ["non-current", "non current", "greater than 1 year"],
+    "mappings": [
+      {"short_name": "Hire Purchase Loan (Current)", "identifier": "currentLiabilities.borrowings.hirePurchaseLoanCurrent"}
+    ]
+  },
+  {
+    "id": "CL_Accruals",
+    "priority": 30,
+    "conditions": [
+      {"type": "OR", "keywords": ["accruals", "accrued expenditure"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Accrued expenditure", "identifier": "currentLiabilities.payables.accruedExpenditure"}
+    ]
+  },
+  {
+    "id": "CL_Directors_Loan",
+    "priority": 31,
+    "conditions": [
+      {"type": "OR", "keywords": ["directors current accounts", "directors loan"]}
+    ],
+    "negations": ["asset"],
+    "mappings": [
+      {"short_name": "Directors current account", "identifier": "currentLiabilities.payables.directorsCurrentAccount"}
+    ]
+  },
+  {
+    "id": "CL_PAYE",
+    "priority": 33,
+    "conditions": [
+      {"type": "OR", "keywords": ["paye", "p.a.y.e"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "PAYE Liability", "identifier": "currentLiabilities.tax.payeLiability"}
+    ]
+  },
+  {
+    "id": "CL_SocialSecurity",
+    "priority": 33.5,
+    "conditions": [
+      {"type": "OR", "keywords": ["national insurance", "ni", "social security"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Social Security & Other Taxes", "identifier": "currentLiabilities.tax.socialSecurityAndOtherTaxes"}
+    ]
+  },
+  {
+    "id": "CL_VAT_Liability",
+    "priority": 34,
+    "conditions": [
+      {"type": "OR", "keywords": ["vat", "sales tax", "purchase tax"]},
+      {"type": "OR", "keywords": ["liability", "control account"]}
+    ],
+    "negations": ["repayable"],
+    "mappings": [
+      {"short_name": "VAT Liability", "identifier": "currentLiabilities.tax.vatLiability"}
+    ]
+  },
+  {
+    "id": "CL_CT_Current",
+    "priority": 35,
+    "conditions": [
+      {"type": "AND", "keywords": ["corporation tax", "liability"]}
+    ],
+    "negations": ["repayable", "recoverable"],
+    "mappings": [
+      {"short_name": "Corporation tax liability current year", "identifier": "currentLiabilities.tax.corporationTaxCurrent"}
+    ]
+  },
+  {
+    "id": "CL_TradeCreditors",
+    "priority": 36,
+    "conditions": [
+      {"type": "OR", "keywords": ["trade creditors", "trade payables", "creditors control account"]}
+    ],
+    "negations": ["intercompany", "group", "fellow", "other"],
+    "mappings": [
+      {"short_name": "Trade Creditors (Payables)", "identifier": "currentLiabilities.payables.tradeCreditors"}
+    ]
+  },
+  {
+    "id": "CL_OtherCreditors",
+    "priority": 37,
+    "conditions": [
+      {"type": "OR", "keywords": ["other creditors", "late creditors"]}
+    ],
+    "negations": ["trade"],
+    "mappings": [
+      {"short_name": "Other Creditors (Payables)", "identifier": "currentLiabilities.payables.otherCreditors"}
+    ]
+  },
+  {
+    "id": "CL_CreditCard",
+    "priority": 38,
+    "conditions": [
+      {"type": "AND", "keywords": ["credit card"]}
+    ],
+    "negations": ["charges"],
+    "mappings": [
+      {"short_name": "Other Loans and Borrowings (Current)", "identifier": "currentLiabilities.borrowings.otherLoansAndBorrowings"}
+    ]
+  },
+  {
+    "id": "NCL_BankLoan",
+    "priority": 40,
+    "conditions": [
+      {"type": "AND", "keywords": ["bank loan"]},
+      {"type": "OR", "keywords": ["non-current", "greater than 1 year", ">1yr"]}
+    ],
+    "negations": ["current", "current portion", "less than 1 year"],
+    "mappings": [
+      {"short_name": "Bank loan (Non-Current)", "identifier": "nonCurrentLiabilities.borrowings.bankLoanNonCurrent"}
+    ]
+  },
+  {
+    "id": "NCL_DeferredTax",
+    "priority": 41,
+    "conditions": [
+      {"type": "AND", "keywords": ["deferred", "tax"]}
+    ],
+    "negations": ["repayable", "recoverable"],
+    "mappings": [
+      {"short_name": "Deferred Taxation Liability", "identifier": "nonCurrentLiabilities.provisions.deferredTaxationLiability"}
+    ]
+  },
+  {
+    "id": "EQ_ShareCapital",
+    "priority": 45,
+    "conditions": [
+      {"type": "AND", "keywords": ["ordinary"]},
+      {"type": "OR", "keywords": ["shares", "capital"]}
+    ],
+    "negations": ["dividends"],
+    "mappings": [
+      {"short_name": "Ordinary Share Capital", "identifier": "equity.shareCapital.ordinaryShareCapital"}
+    ]
+  },
+  {
+    "id": "EQ_RetainedEarnings",
+    "priority": 46,
+    "conditions": [
+      {"type": "OR", "keywords": ["retained earnings", "profit and loss account"]}
+    ],
+    "negations": ["reserve"],
+    "mappings": [
+      {"short_name": "Retained Earnings", "identifier": "equity.retainedEarnings.retainedEarnings"}
+    ]
+  },
+  {
+    "id": "EQ_DividendsPaid",
+    "priority": 47,
+    "conditions": [
+      {"type": "AND", "keywords": ["dividends"]}
+    ],
+    "negations": ["income"],
+    "mappings": [
+      {"short_name": "Dividends paid", "identifier": "equity.dividendsPaid"}
+    ]
+  },
+  {
+    "id": "PNL_Income_Rental",
+    "priority": 50,
+    "conditions": [
+      {"type": "AND", "keywords": ["rental", "income"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Rental income", "identifier": "turnover.rentalIncome"}
+    ]
+  },
+  {
+    "id": "PNL_Sales_Services",
+    "priority": 51,
+    "conditions": [
+      {"type": "AND", "keywords": ["sales", "services", "memberships", "fees"]}
+    ],
+    "negations": ["goods"],
+    "mappings": [
+      {"short_name": "Sales of services", "identifier": "turnover.salesOfServices"}
+    ]
+  },
+  {
+    "id": "PNL_Sales_Goods",
+    "priority": 52,
+    "conditions": [
+      {"type": "AND", "keywords": ["sales"]},
+      {"type": "OR", "keywords": ["goods", "cash", "accounts", "parts"]}
+    ],
+    "negations": ["services"],
+    "mappings": [
+      {"short_name": "Sales of goods", "identifier": "turnover.salesOfGoods"}
+    ]
+  },
+  {
+    "id": "PNL_Income_BankInterest",
+    "priority": 55,
+    "conditions": [
+      {"type": "AND", "keywords": ["bank", "interest", "received"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Income from bank deposits", "identifier": "financialIncome.incomeFromBankDeposits"}
+    ]
+  },
+  {
+    "id": "PNL_COS_RawMaterials",
+    "priority": 62,
+    "conditions": [
+      {"type": "AND", "keywords": ["raw materials"]}
+    ],
+    "negations": ["finished goods"],
+    "mappings": [
+      {"short_name": "Raw materials purchases", "identifier": "costOfSales.rawMaterialsPurchases"}
+    ]
+  },
+  {
+    "id": "PNL_COS_DirectStaff",
+    "priority": 63,
+    "conditions": [
+      {"type": "AND", "keywords": ["wages", "salaries"]},
+      {"type": "OR", "keywords": ["direct", "production"]}
+    ],
+    "negations": ["indirect", "admin"],
+    "mappings": [
+      {"short_name": "Direct Staff costs - Wages and salaries", "identifier": "costOfSales.directStaffCosts"}
+    ]
+  },
+  {
+    "id": "PNL_COS_Purchases",
+    "priority": 65,
+    "conditions": [
+      {"type": "AND", "keywords": ["purchases"]},
+      {"type": "NOT_AND", "keywords": ["administrative", "admin"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Finished goods purchases", "identifier": "costOfSales.finishedGoodsPurchases"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Rent",
+    "priority": 68,
+    "conditions": [
+      {"type": "AND", "keywords": ["rent"]}
+    ],
+    "negations": ["income", "finance"],
+    "mappings": [
+      {"short_name": "Rent on operating lease", "identifier": "administrative.rentOnOperatingLease"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Directors_Remun",
+    "priority": 70,
+    "conditions": [
+      {"type": "OR", "keywords": ["directors remun", "directors remuneration"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Indirect staff costs administration Directors remuneration", "identifier": "indirectStaffCostsAdministration.directorsRemuneration"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Pension",
+    "priority": 70.5,
+    "conditions": [
+      {"type": "AND", "keywords": ["pension", "costs"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Staff costs - Pension costs", "identifier": "staffCosts.pensionCosts"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Direct_Staff",
+    "priority": 71,
+    "conditions": [
+      {"type": "OR", "keywords": ["wages", "salaries", "gratuities"]},
+      {"type": "NOT_AND", "keywords": ["director", "indirect", "direct", "production"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Staff costs - Wages and salaries", "identifier": "staffCosts.wagesAndSalaries"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Insurance",
+    "priority": 72.5,
+    "conditions": [
+      {"type": "AND", "keywords": ["insurance"]}
+    ],
+    "negations": ["national", "social security"],
+    "mappings": [
+      {"short_name": "Insurance costs", "identifier": "administrative.insuranceCosts"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_LightAndHeat",
+    "priority": 73,
+    "conditions": [
+      {"type": "OR", "keywords": ["light", "heating", "heat"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Light and heat", "identifier": "administrative.lightAndHeat"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Motor",
+    "priority": 74,
+    "conditions": [
+      {"type": "OR", "keywords": ["fuel", "vehicle repairs", "car insurance", "motor running"]}
+    ],
+    "negations": ["depreciation", "cost"],
+    "mappings": [
+      {"short_name": "Motor and vehicle running costs", "identifier": "administrative.motorAndVehicleRunningCosts"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Utilities",
+    "priority": 74.5,
+    "conditions": [
+      {"type": "OR", "keywords": ["water rates", "refuse collection", "utilities"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Premises and utility costs Utilities", "identifier": "administrative.premisesUtilities"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Depreciation",
+    "priority": 75,
+    "conditions": [
+      {"type": "AND", "keywords": ["depreciation"]},
+      {"type": "NOT_AND", "keywords": ["accumulated", "eliminated", "disposals", "charge for period"]}
+    ],
+    "negations": ["eliminated", "disposals", "charge for period", "b/f", "depn"],
+    "mappings": [
+      {"short_name": "Depreciation charge", "identifier": "depreciation.depreciationCharge"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Legal_Fees",
+    "priority": 76,
+    "conditions": [
+      {"type": "OR", "keywords": ["legal", "professional fees", "audit", "accountancy", "tax fees"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Legal and Professional fees", "identifier": "administrative.legalAndProfessionalFees"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Telephone",
+    "priority": 78,
+    "conditions": [
+      {"type": "OR", "keywords": ["telephone", "telecoms", "mobile phone"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Telephone and communication costs", "identifier": "administrative.telephone"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Stationery",
+    "priority": 79,
+    "conditions": [
+      {"type": "OR", "keywords": ["stationery", "printing", "postage"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Stationery and printing", "identifier": "administrative.stationery"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_BankCharges",
+    "priority": 80,
+    "conditions": [
+      {"type": "OR", "keywords": ["bank charges", "credit card charges"]}
+    ],
+    "negations": ["interest"],
+    "mappings": [
+      {"short_name": "Finance costs - Bank charges", "identifier": "financeCosts.bankCharges"}
+    ]
+  },
+  {
+    "id": "PNL_Expense_Sundry",
+    "priority": 81,
+    "conditions": [
+      {"type": "OR", "keywords": ["sundry expenses", "other costs", "general expenses"]}
+    ],
+    "negations": [],
+    "mappings": [
+      {"short_name": "Administrative purchases Sundry expenses", "identifier": "administrativePurchases.sundryExpenses"}
+    ]
+  }
+]
