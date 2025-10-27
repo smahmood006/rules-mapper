@@ -44,7 +44,7 @@ Rules-account/
 
 ## Project Description
 
-This is a **RSM TAXIOM Mapping Engine** project that processes financial descriptions and maps them to standardized accounting categories using a rules-based system.
+This is a **ABC TAXIOM Mapping Engine** project that processes financial descriptions and maps them to standardized accounting categories using a rules-based system.
 
 ### Key Features:
 1. **Normalization:** Standardizes text by converting to lowercase, replacing symbols, and removing punctuation

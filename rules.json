@@ -32,16 +32,16 @@
     ]
   },
   {
-    "id": "SPECIAL_RSM_01",
+    "id": "SPECIAL_ABC_01",
     "priority": 3,
     "conditions": [
-      {"type": "AND", "keywords": ["rsm-01"]}
+      {"type": "AND", "keywords": ["abc-01"]}
     ],
     "negations": [],
     "mappings": [
       {
         "short_name": "Client-Specific Mapping Override",
-        "identifier": "clientSpecific.rsm01Override"
+        "identifier": "clientSpecific.abc01Override"
       }
     ]
   },

@@ -130,7 +130,7 @@ if __name__ == "__main__":
         if not test_descriptions:
             print(f"\nExiting. No descriptions found in '{description_file}'.")
         else:
-            print("--- RSM TAXIOM MAPPING ENGINE ---")
+            print("--- ABC TAXIOM MAPPING ENGINE ---")
             print(f"Processing {len(test_descriptions)} descriptions from '{description_file}'...")
             
             # 3. Apply Rules to each description

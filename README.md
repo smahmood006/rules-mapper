@@ -1,4 +1,4 @@
-# RSM TAXIOM Mapping Engine
+# ABC TAXIOM Mapping Engine
 
 A Python-based rules engine that processes financial descriptions and maps them to standardized accounting categories using prioritized rules and boolean logic.
 
