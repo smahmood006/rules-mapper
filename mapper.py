@@ -182,19 +182,23 @@ if __name__ == "__main__":
             else:
                 print(f"\nProcessing {len(test_descriptions)} descriptions from '{description_file}'...\n")
                 
+                # Print CSV header
+                print("Input,Normalized,Match Count,Short Name,Identifier")
+                
                 # 4. Apply Rules to each description
                 for desc in test_descriptions:
                     results = apply_rules(desc, mapping_rules)
-                    
-                    print(f"INPUT: '{desc}'")
+                    normalized = normalize(desc)
                     
                     if results:
-                        print(f"  Normalized: '{normalize(desc)}'")
-                        print(f"  Match Count: {len(results)}")
                         for i, result in enumerate(results):
-                            print(f"    Mapping {i+1} Short Name: {result['short_name']}")
-                            print(f"    Mapping {i+1} Identifier: {result['identifier']}")
+                            # Escape quotes in CSV by doubling them
+                            safe_input = desc.replace('"', '""')
+                            safe_short_name = result['short_name'].replace('"', '""')
+                            safe_identifier = result['identifier'].replace('"', '""')
+                            
+                            print(f'"{safe_input}","{normalized}",{len(results)},"{safe_short_name}","{safe_identifier}"')
                     else:
-                        print(f"  Normalized: '{normalize(desc)}'")
-                        print("  => NO MATCH FOUND. (Review rules.json)")
-                    print()
+                        # No match found
+                        safe_input = desc.replace('"', '""')
+                        print(f'"{safe_input}","{normalized}",0,"NO MATCH",""')
